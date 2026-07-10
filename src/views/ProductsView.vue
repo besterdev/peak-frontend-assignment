@@ -73,15 +73,23 @@ onMounted(() => {
         </div>
       </div>
 
-      <Alert v-else-if="error" variant="destructive">
-        <AlertCircle class="size-4" />
-        <AlertTitle>เกิดข้อผิดพลาด</AlertTitle>
-        <AlertDescription class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <span>{{ error }}</span>
-          <Button type="button" variant="outline" size="sm" @click="productsStore.fetchProductsOnce()">
-            ลองใหม่
-          </Button>
-        </AlertDescription>
+      <Alert v-else-if="error" variant="destructive" class="flex flex-col items-center gap-4 py-8 text-center">
+        <div class="w-40 overflow-hidden rounded-3xl bg-white p-2 sm:w-48">
+          <img
+            src="/empty-search.webp"
+            alt="ไม่สามารถโหลดสินค้าได้"
+            class="w-full object-contain"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+        <div class="space-y-1">
+          <AlertTitle>เกิดข้อผิดพลาด</AlertTitle>
+          <AlertDescription>{{ error }}</AlertDescription>
+        </div>
+        <Button type="button" variant="outline" size="sm" @click="productsStore.fetchProductsOnce()">
+          ลองใหม่
+        </Button>
       </Alert>
 
       <template v-else>
