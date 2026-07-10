@@ -18,7 +18,7 @@ let wasIntersecting = false
 const observe = () => {
   observer?.disconnect()
 
-  if (!sentinelRef.value || !props.hasMore || props.loading) {
+  if (!sentinelRef.value || !props.hasMore) {
     if (!props.hasMore) wasIntersecting = false
     return
   }
@@ -33,7 +33,7 @@ const observe = () => {
         return
       }
 
-      if (wasIntersecting) return
+      if (wasIntersecting || props.loading) return
 
       wasIntersecting = true
       emit('loadMore')
@@ -47,7 +47,7 @@ const observe = () => {
 onMounted(observe)
 
 watch(
-  () => [props.hasMore, props.loading],
+  () => props.hasMore,
   () => {
     observe()
   },
