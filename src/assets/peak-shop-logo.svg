@@ -1,0 +1,16 @@
+<svg width="218" height="48" viewBox="0 0 218 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">PEAK SHOP</title>
+  <desc id="desc">PEAK SHOP geometric mountain logo</desc>
+  <defs>
+    <linearGradient id="peak-gradient" x1="3" y1="43" x2="45" y2="3" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3696F5"/>
+      <stop offset="1" stop-color="#43D9D7"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="44" height="44" rx="8" stroke="url(#peak-gradient)" stroke-width="4"/>
+  <path d="M12 35L24 11L36 35" stroke="url(#peak-gradient)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M18 29H30" stroke="url(#peak-gradient)" stroke-width="4" stroke-linecap="round"/>
+  <text x="58" y="29" fill="#1F3475" font-family="DM Sans, Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="1.2">PEAK</text>
+  <circle cx="139" cy="27" r="2.5" fill="#F294BD"/>
+  <text x="151" y="29" fill="#3696F5" font-family="DM Sans, Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="2.4">SHOP</text>
+</svg>
