@@ -25,7 +25,13 @@ See [Vite Configuration Reference](https://vite.dev/config/).
 
 ## Project Setup
 
+This project uses **Node.js 22.19.0** (see `.nvmrc`).
+
 ```sh
+# switch to the required Node version in your current shell
+source scripts/use-node.sh
+# or: nvm use
+
 npm install
 ```
 
