@@ -13,19 +13,30 @@ const emit = defineEmits<{
 
 const sentinelRef = ref<HTMLElement | null>(null)
 let observer: IntersectionObserver | null = null
+let wasIntersecting = false
 
 const observe = () => {
   observer?.disconnect()
 
   if (!sentinelRef.value || !props.hasMore || props.loading) {
+    if (!props.hasMore) wasIntersecting = false
     return
   }
 
   observer = new IntersectionObserver(
     (entries) => {
-      if (entries.some((entry) => entry.isIntersecting)) {
-        emit('loadMore')
+      const entry = entries[0]
+      if (!entry) return
+
+      if (!entry.isIntersecting) {
+        wasIntersecting = false
+        return
       }
+
+      if (wasIntersecting) return
+
+      wasIntersecting = true
+      emit('loadMore')
     },
     { rootMargin: '200px 0px' },
   )
