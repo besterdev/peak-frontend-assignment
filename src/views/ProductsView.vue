@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
-import { AlertCircle } from 'lucide-vue-next'
 import { useProductsStore } from '@/stores/products'
 import { useProductFilters } from '@/composables/useProductFilters'
 import { useInfiniteList } from '@/composables/useInfiniteList'
@@ -32,11 +31,12 @@ const {
   clearAllFilters,
 } = useProductFilters(products)
 
-const { visibleItems, hasMore, loading: loadingMore, loadMore } = useInfiniteList(
-  filteredProducts,
-  PAGE_SIZE,
-  INFINITE_SCROLL_DELAY_MS,
-)
+const {
+  visibleItems,
+  hasMore,
+  loading: loadingMore,
+  loadMore,
+} = useInfiniteList(filteredProducts, PAGE_SIZE, INFINITE_SCROLL_DELAY_MS)
 
 const showEmpty = computed(
   () => !loading.value && !error.value && filteredProducts.value.length === 0,
@@ -58,8 +58,15 @@ onMounted(() => {
     <div id="product-catalog" class="space-y-6">
       <header class="space-y-1">
         <div class="flex items-end justify-between gap-4">
-          <div><p class="mb-2 text-[10px] font-bold uppercase tracking-[0.24em] text-muted-foreground">Curated catalog</p><h2 class="text-4xl tracking-tight sm:text-5xl">All essentials</h2></div>
-          <span class="hidden pb-1 text-sm text-muted-foreground sm:block">{{ filteredProducts.length }} pieces</span>
+          <div>
+            <p class="mb-2 text-[10px] font-bold uppercase tracking-[0.24em] text-muted-foreground">
+              Curated catalog
+            </p>
+            <h2 class="text-4xl tracking-tight sm:text-5xl">All essentials</h2>
+          </div>
+          <span class="hidden pb-1 text-sm text-muted-foreground sm:block"
+            >{{ filteredProducts.length }} pieces</span
+          >
         </div>
       </header>
 
@@ -73,7 +80,11 @@ onMounted(() => {
         </div>
       </div>
 
-      <Alert v-else-if="error" variant="destructive" class="flex flex-col items-center gap-4 py-8 text-center">
+      <Alert
+        v-else-if="error"
+        variant="destructive"
+        class="flex flex-col items-center gap-4 py-8 text-center"
+      >
         <div class="w-40 overflow-hidden rounded-3xl bg-white p-2 sm:w-48">
           <img
             src="/empty-search.webp"
@@ -87,7 +98,12 @@ onMounted(() => {
           <AlertTitle>เกิดข้อผิดพลาด</AlertTitle>
           <AlertDescription>{{ error }}</AlertDescription>
         </div>
-        <Button type="button" variant="outline" size="sm" @click="productsStore.fetchProductsOnce()">
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          @click="productsStore.fetchProductsOnce()"
+        >
           ลองใหม่
         </Button>
       </Alert>
@@ -95,11 +111,7 @@ onMounted(() => {
       <template v-else>
         <section class="space-y-4" aria-label="ค้นหาและกรองสินค้า">
           <ProductSearch v-model="searchQuery" />
-          <TagFilterBar
-            :tags="allTags"
-            :selected-tags="selectedTags"
-            @toggle="toggleTag"
-          />
+          <TagFilterBar :tags="allTags" :selected-tags="selectedTags" @toggle="toggleTag" />
           <ActiveFilterPills
             :search-query="searchQuery"
             :selected-tags="selectedTags"
@@ -115,7 +127,11 @@ onMounted(() => {
 
         <template v-if="showResults">
           <ProductGrid :products="visibleItems" />
-          <InfiniteScrollSentinel :has-more="hasMore" :loading="loadingMore" @load-more="loadMore" />
+          <InfiniteScrollSentinel
+            :has-more="hasMore"
+            :loading="loadingMore"
+            @load-more="loadMore"
+          />
         </template>
       </template>
     </div>
