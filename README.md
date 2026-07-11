@@ -1,60 +1,105 @@
-# webapp
+# PEAK SHOP
 
-This template should help get you started developing with Vue 3 in Vite.
+Modern minimal e-commerce frontend built with Vue 3, TypeScript, Vite, Pinia, Tailwind CSS, and shadcn-style local UI primitives.
 
-## Recommended IDE Setup
+## Assignment Requirements
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+### API Integration
 
-## Recommended Browser Setup
+- Load product data from the provided JSON response shape.
+- Fetch products once when the product page loads.
+- Handle loading, error, retry, and empty states.
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+### Product List Page
 
-## Type Support for `.vue` Imports in TS
+- Display product image, title, price, and tags.
+- Search products by title with debounced input.
+- Filter by multiple tags and combine filters with search.
+- Show product count and removable active-filter pills.
+- Show a friendly empty state when no products match.
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+### Product Detail Page
 
-## Customize configuration
+- Show product description and all product photos.
+- Provide a product gallery and back-to-list navigation.
+- Provide quantity selection and Add to Cart action.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+### Shopping Cart
 
-## Project Setup
+- Show selected products, quantity, subtotal, and total price.
+- Increment and decrement item quantity.
+- Remove individual items and clear the entire cart.
+- Confirm destructive cart actions.
+- Persist cart data in localStorage.
+- Show an empty-cart state.
 
-This project uses **Node.js 22.19.0** (see `.nvmrc`).
+### Advanced Features
 
-```sh
-# switch to the required Node version in your current shell
-source scripts/use-node.sh
-# or: nvm use
+- Infinite scroll with loading delay and loading skeletons.
+- Lazy loading for product images.
+- Toast notifications for add, remove, and clear-cart actions.
+- Framer Motion-style micro-interactions via the project animation system.
+- Responsive mobile-first layout with a two-column product grid on mobile.
+- Accessibility labels, semantic HTML, keyboard-friendly controls, and focus states.
 
+## Technology Stack
+
+- Framework: Vue 3 + TypeScript
+- State management: Pinia
+- Routing: Vue Router
+- Styling: Tailwind CSS
+- UI primitives: shadcn-style local components
+- HTTP client: Axios
+- Testing: Vitest
+- Code quality: ESLint, Oxlint, and Prettier
+
+## Requirements
+
+- Node.js `22.19.0` (see `.nvmrc`)
+- npm
+
+## Setup
+
+```bash
+nvm use
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+If Node.js is managed by the project helper:
 
-```sh
+```bash
+source scripts/use-node.sh
+```
+
+## Development
+
+```bash
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+The app runs with Vite. Product data is loaded directly from `[public/db.json](public/db.json)`, so no separate mock API server is required.
 
-```sh
+## Mock Data
+
+Update `[public/db.json](public/db.json)` to change the product catalog. The frontend requests it through `/db.json` in `src/api/products.ts`.
+
+The legacy Express mock server remains available under `../json-server` for API testing, but it is not required by the frontend.
+
+## Validation
+
+```bash
+npm run type-check
+npm run test:unit
 npm run build
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+## Main Features
 
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+- Responsive product catalog with two-column mobile grid
+- Search, tag filters, tag sorting, and infinite scroll
+- Product detail gallery and quantity selector
+- Cart drawer and full cart page
+- Toast feedback for cart actions
+- Confirm dialogs for clearing the cart and removing items
+- Empty, loading, and error states
+- SPA fallback configuration for Vercel deployment
