@@ -16,7 +16,7 @@ describe('fetchProducts', () => {
     mockedGet.mockResolvedValue({ data: response })
 
     await expect(fetchProducts()).resolves.toEqual(response)
-    expect(mockedGet).toHaveBeenCalledWith('/api/products')
+    expect(mockedGet).toHaveBeenCalledWith('/db.json')
   })
 
   it('normalizes request failures into ApiError', async () => {

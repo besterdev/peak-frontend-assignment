@@ -1,7 +1,7 @@
 import axios from 'axios'
 import type { ProductsResponse } from '@/types/product'
 
-const PRODUCTS_ENDPOINT = import.meta.env.DEV ? '/api/products' : '/api/products.json'
+const PRODUCTS_ENDPOINT = '/db.json'
 
 export class ApiError extends Error {
   constructor(
